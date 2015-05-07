@@ -1,9 +1,11 @@
 $(document).ready(function(){
 
-	//Store Frost Date in 4 diget format from Farmsense
+	// Stores object returned from Farmsense $.getJSON
+	// Meets datastructure requirement
 	eventData = [];
 
 	// Allow user to mannually enter longitude & latitude if no geolocation
+	// Meets DOM manipulation requirement
 	function showManual(){
 		$("#go").hide();
 	    $("#text").css("display", "none");
@@ -49,6 +51,7 @@ $(document).ready(function(){
 
 	// Displays weather stations
 	// Takes in coordinates array
+	// Meets AJAX requirement
 	function displayStations(coordinates){
 		$("#form_coord").hide();
 		$("#risk").css("display", "block");
@@ -95,7 +98,9 @@ $(document).ready(function(){
 	}
 
 
-	// Captures Station Selection
+	// Captures station selection
+	// Push to array of objects
+	// Meets listener requirement
 	$("#location").change(function() {
 		$("#pick").hide();
 		var id = $("input[name='station_radio']:checked").val();
@@ -109,7 +114,7 @@ $(document).ready(function(){
 	});
 
 	// Displays date in red box
-	// Takes in date from Farmsense
+	// Takes in date
 	function displayDate(date_string){
 		$("#date").html(date_string).css("display", "block").focus;
 	}
@@ -121,6 +126,7 @@ $(document).ready(function(){
 	}
 
 	// Displays date  in alert when user returns to page
+	// I think this is a better way to display past info than in html
 	function welcomeBack(){
 		var full_date = window.localStorage.getItem('full_date');
 		if(full_date != undefined){
@@ -129,7 +135,7 @@ $(document).ready(function(){
 		}
 	}
 
-	// Converts date from Farmsense
+	// Converts date from Farmsense into spelled out month and day
 	// Takes in date from Farmsense
 	function convertDate(date_string){
 		var month = date_string.substr(0, 2);
@@ -211,6 +217,7 @@ $(document).ready(function(){
 
 		var safty = $("input[name='safty_value']:checked").val();
 		switch (safty) { 
+			// Allows user to select probability data
     		case 'safty1': 
         	var frost_str = eventData[1].prob_50;
         	break;

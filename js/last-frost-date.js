@@ -2,7 +2,10 @@ $(document).ready(function(){
 
 	// Stores object returned from Farmsense $.getJSON
 	// Meets datastructure requirement
-	eventData = [];
+	var eventData = [];
+
+	var valid_longitude;
+	var valid_latitude;
 
 	// Allow user to mannually enter longitude & latitude if no geolocation
 	// Meets DOM manipulation requirement
@@ -13,14 +16,57 @@ $(document).ready(function(){
 		$("#error").append("<p>Your location information is unavailable or you have blocked it. Please enter the longitude and latitude in the fields below. If you don't know your coordinates, you can find them <a href='http://www.latlong.net/convert-address-to-lat-long.html' target='_blank'>here.</a></p>");
 		$("#error").append("<form id='form_coord'><form>");
 		$("#form_coord").append("<label for='longitude'>Enter Longitude<label>");
+		$("#form_coord").append("<div id='long_container'></div>");
 		$("#form_coord").append("<input type='text' id='form_long' placeholder='longitude'/><br />");
 		$("#form_coord").append("<label for='latitude'>Enter Latitude<label>");
+		$("#form_coord").append("<div id='lat_container'></div>");
 		$("#form_coord").append("<input type='text' id='form_lat' placeholder='latitude'/><br />");
 		$("#form_coord").append("<input type='submit' id='form_button' value='Submit'/><br /><br />");
-		$("#form_coord").submit(function(){
+		
+		// Validates user input for longitude and latitude
+		// Meets validation requirement
+
+		$("#form_lat").focusout(function(event){
+			var lat = $(this).val();
+			console.log(lat);
+			var lat_regex = /^(\-?\d+(\.\d+)?)$/;
+			if (!(lat_regex.test(lat))){
+				$("#lat_container").html("<p id='lat_valid'>Please enter a valid latitude</p>");
+			}
+			else{
+				$("#lat_container").html("");
+				valid_latitude = true;
+			}
+			event.stopPropagation();
+		});
+
+		$("#form_long").focusout(function(event){
+			var long = $(this).val();
+			console.log(long);
+			var long_regex = /^(\-?\d+(\.\d+)?)$/;
+			if (!(long_regex.test(long))){
+				$("#long_container").html("<p id='long_valid'>Please enter a valid Longitude</p>");
+			}else{
+				valid_longitude = true;
+				$("#long_container").html("");
+				
+			}
+			event.stopPropagation();
+		});
+
+		// There is no need to submit form to server because the data isn't leaving the page.
+		$("#form_coord").submit(function(event){
+			console.log("lat: " + valid_latitude + " long: " + valid_longitude);
 			inputs[0]=$("#form_long").val();
 			inputs[1]=$("#form_lat").val();
-			displayStations(inputs);
+			if (valid_longitude && valid_latitude){
+				("#form_coord").html("");
+				displayStations(inputs);
+			}else{
+				$("#form_coord").html("<div id='coordinates_container'><p id='coordinates_message'>Please enter valid coordinates.</p></div>");
+				event.preventDefault();
+			}
+			
 			return false;
 		});
 	}

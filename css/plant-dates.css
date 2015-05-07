@@ -1,0 +1,41 @@
+/*plant-dates.css*/
+h2{
+	color: blue;
+}
+
+input[type="checkbox"]{
+	margin:0 10px 10px 0;
+}
+
+#pick{
+	display:none;
+}
+
+#safty{
+	margin-bottom: 20px;
+}
+
+#risk{
+	display:none;
+}
+
+#go_again{
+	display:none;
+	margin:10px 0 10px 0;
+}
+
+#date{
+	display:none;
+	border:1px solid red;
+	text-align: center;
+	padding: 10px;
+	margin-top: 10px;
+}
+
+#form_long, #form_lat{
+	margin: 0 0 10px 10px;
+}
+
+#restart{
+	display:none;
+}

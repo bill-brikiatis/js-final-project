@@ -6,6 +6,10 @@ $(document).ready(function(){
 
 	var valid_longitude;
 	var valid_latitude;
+	var lat;
+	var long;
+	var regex = /^(\-?\d+(\.\d+)?)$/;
+
 
 	var inputs=[];
 
@@ -25,18 +29,19 @@ $(document).ready(function(){
 		$("#form_coord").append("<input type='text' id='form_lat' placeholder='latitude'/><br />");
 		$("#form_coord").append("<input type='submit' id='form_button' value='Submit'/><br /><br />");
 
+
 		// Validates user input for longitude and latitude
 		// Meets validation requirement
 
 		$("#form_lat").focusout(function(event){
-			var lat = $(this).val();
+			lat = $(this).val();
 			console.log(lat);
-			var lat_regex = /^(\-?\d+(\.\d+)?)$/;
-			if (!(lat_regex.test(lat))){
+			//lat_regex = /^(\-?\d+(\.\d+)?)$/;
+			if (!(regex.test(lat))){
 				$("#lat_container").html("<p id='lat_valid'>Please enter a valid latitude</p>");
 				valid_latitude = false;
 			}
-			else{
+			else {
 				$("#lat_container").html("");
 				valid_latitude = true;
 			}
@@ -44,13 +49,13 @@ $(document).ready(function(){
 		});
 
 		$("#form_long").focusout(function(event){
-			var long = $(this).val();
+			long = $(this).val();
 			console.log(long);
-			var long_regex = /^(\-?\d+(\.\d+)?)$/;
-			if (!(long_regex.test(long))){
+			//var long_regex = /^(\-?\d+(\.\d+)?)$/;
+			if (!(regex.test(long))){
 				$("#long_container").html("<p id='long_valid'>Please enter a valid Longitude</p>");
 				valid_longitude = false;
-			}else{
+			} else {
 				valid_longitude = true;
 				$("#long_container").html("");
 				
@@ -74,7 +79,7 @@ $(document).ready(function(){
 			if (valid_longitude && valid_latitude){
 				displayStations(inputs);
 
-			}else{
+			} else {
 				$("#form_coord").append("<div id='coordinates_container'><p id='coordinates_message'>Please enter valid coordinates.</p></div>");
 
 			}

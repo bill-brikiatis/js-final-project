@@ -10,9 +10,10 @@ $(document).ready(function(){
 	// Allow user to mannually enter longitude & latitude if no geolocation
 	// Meets DOM manipulation requirement
 	function showManual(){
+		console.log("showmanual started")
 		$("#go").hide();
 	    $("#text").css("display", "none");
-		var inputs=[]
+		var inputs=[];
 		$("#error").append("<p>Your location information is unavailable or you have blocked it. Please enter the longitude and latitude in the fields below. If you don't know your coordinates, you can find them <a href='http://www.latlong.net/convert-address-to-lat-long.html' target='_blank'>here.</a></p>");
 		$("#error").append("<form id='form_coord'><form>");
 		$("#form_coord").append("<label for='longitude'>Enter Longitude<label>");
@@ -32,6 +33,7 @@ $(document).ready(function(){
 			var lat_regex = /^(\-?\d+(\.\d+)?)$/;
 			if (!(lat_regex.test(lat))){
 				$("#lat_container").html("<p id='lat_valid'>Please enter a valid latitude</p>");
+				valid_latitude = false;
 			}
 			else{
 				$("#lat_container").html("");
@@ -46,6 +48,7 @@ $(document).ready(function(){
 			var long_regex = /^(\-?\d+(\.\d+)?)$/;
 			if (!(long_regex.test(long))){
 				$("#long_container").html("<p id='long_valid'>Please enter a valid Longitude</p>");
+				valid_latitude = true;
 			}else{
 				valid_longitude = true;
 				$("#long_container").html("");
@@ -60,11 +63,9 @@ $(document).ready(function(){
 			inputs[0]=$("#form_long").val();
 			inputs[1]=$("#form_lat").val();
 			if (valid_longitude && valid_latitude){
-				("#form_coord").html("");
 				displayStations(inputs);
 			}else{
 				$("#form_coord").html("<div id='coordinates_container'><p id='coordinates_message'>Please enter valid coordinates.</p></div>");
-				event.preventDefault();
 			}
 			
 			return false;

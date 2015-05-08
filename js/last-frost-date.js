@@ -80,7 +80,7 @@ $(document).ready(function(){
 				displayStations(inputs);
 
 			} else {
-				$("#form_coord").append("<div id='coordinates_container'><p id='coordinates_message'>Please enter valid coordinates.</p></div>");
+				// $("#form_coord").append("<div id='coordinates_container'><p id='coordinates_message'>Please enter valid coordinates.</p></div>");
 
 			}
 			event.stopPropagation();

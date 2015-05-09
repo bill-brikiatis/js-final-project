@@ -9,8 +9,6 @@ $(document).ready(function(){
 	var lat;
 	var long;
 	var regex = /^(\-?\d+(\.\d+)?)$/;
-
-
 	var inputs=[];
 
 	// Allow user to mannually enter longitude & latitude if no geolocation
@@ -33,33 +31,62 @@ $(document).ready(function(){
 		// Validates user input for longitude and latitude
 		// Meets validation requirement
 
-		$("#form_lat").focusout(function(event){
+		// $("#form_lat").focusout(function(event){
+		// 	lat = $(this).val();
+		// 	console.log(lat);
+		// 	if (!(regex.test(lat))){
+		// 		$("#lat_container").html("<p id='lat_valid'>Please enter a valid latitude</p>");
+		// 		valid_latitude = false;
+		// 	}
+		// 	else {
+		// 		$("#lat_container").html("");
+		// 		valid_latitude = true;
+		// 	}
+		// 	event.stopPropagation();
+		// });
+
+		$("#form_lat").mousedown(function(event){
 			lat = $(this).val();
 			console.log(lat);
-			//lat_regex = /^(\-?\d+(\.\d+)?)$/;
 			if (!(regex.test(lat))){
-				$("#lat_container").html("<p id='lat_valid'>Please enter a valid latitude</p>");
-				valid_latitude = false;
-			}
-			else {
-				$("#lat_container").html("");
-				valid_latitude = true;
-			}
+					$("#lat_container").html("<p id='lat_valid'>Please enter a valid latitude</p>");
+					valid_latitude = false;
+				}
+				else {
+					$("#lat_container").html("");
+					valid_latitude = true;
+					//$("#form_coord").submit(event);
+				}
 			event.stopPropagation();
 		});
 
-		$("#form_long").focusout(function(event){
+		// $("#form_long").focusout(function(event){
+		// 	long = $(this).val();
+		// 	console.log(long);
+		// 	//var long_regex = /^(\-?\d+(\.\d+)?)$/;
+		// 	if (!(regex.test(long))){
+		// 		$("#long_container").html("<p id='long_valid'>Please enter a valid Longitude</p>");
+		// 		valid_longitude = false;
+		// 	} else {
+		// 		valid_longitude = true;
+		// 		$("#long_container").html("");
+				
+		// 	}
+		// 	event.stopPropagation();
+		// });
+
+		$("#form_long").mousedown(function(event){
 			long = $(this).val();
 			console.log(long);
-			//var long_regex = /^(\-?\d+(\.\d+)?)$/;
 			if (!(regex.test(long))){
-				$("#long_container").html("<p id='long_valid'>Please enter a valid Longitude</p>");
-				valid_longitude = false;
-			} else {
-				valid_longitude = true;
-				$("#long_container").html("");
-				
-			}
+					$("#lat_container").html("<p id='lat_valid'>Please enter a valid latitude</p>");
+					valid_longitude = false;
+				}
+				else {
+					$("#lat_container").html("");
+					valid_longitude = true;
+					//$("#form_coord").submit(event);
+				}
 			event.stopPropagation();
 		});
 
@@ -80,7 +107,6 @@ $(document).ready(function(){
 				displayStations(inputs);
 
 			} else {
-				// $("#form_coord").append("<div id='coordinates_container'><p id='coordinates_message'>Please enter valid coordinates.</p></div>");
 
 			}
 			event.stopPropagation();
